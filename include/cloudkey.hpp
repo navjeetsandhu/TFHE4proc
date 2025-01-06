@@ -46,6 +46,7 @@ void bkfftgen(BootstrappingKeyFFT<P>& bkfft,
               const Key<typename P::domainP>& domainkey,
               const Key<typename P::targetP>& targetkey)
 {
+    std::cout << "l";
     Polynomial<typename P::targetP> plainpoly = {};
     for (int i = 0; i < P::domainP::k * P::domainP::n; i++) {
         int count = 0;
@@ -144,6 +145,7 @@ void privkskgen(PrivateKeySwitchingKey<P>& privksk,
                 const Key<typename P::domainP>& domainkey,
                 const Key<typename P::targetP>& targetkey)
 {
+    std::cout << "i";
     std::array<typename P::domainP::T, P::domainP::k * P::domainP::n + 1> key;
     for (int i = 0; i < P::domainP::k * P::domainP::n; i++)
         key[i] = domainkey[i];
