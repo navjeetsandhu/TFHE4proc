@@ -347,6 +347,7 @@ struct EvalKey {
     template <class P>
     void emplacebkfft(const SecretKey& sk)
     {
+        std::cout << "m";
         if constexpr (std::is_same_v<P, lvl01param>) {
             bkfftlvl01 = std::unique_ptr<BootstrappingKeyFFT<lvl01param>>(
                 new (std::align_val_t(64)) BootstrappingKeyFFT<lvl01param>());
