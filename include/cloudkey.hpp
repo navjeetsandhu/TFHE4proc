@@ -46,7 +46,7 @@ void bkfftgen(BootstrappingKeyFFT<P>& bkfft,
               const Key<typename P::domainP>& domainkey,
               const Key<typename P::targetP>& targetkey)
 {
-    std::cout << "l";
+    std::cout << std::endl << "l";
     Polynomial<typename P::targetP> plainpoly = {};
     for (int i = 0; i < P::domainP::k * P::domainP::n; i++) {
         int count = 0;
@@ -54,14 +54,14 @@ void bkfftgen(BootstrappingKeyFFT<P>& bkfft,
              j++) {
             if (j != 0) {
                 plainpoly[0] = domainkey[i] == j;
-                std::cout << "p";
+                //std::cout << "p";
                 bkfft[i][count] = trgswfftSymEncrypt<typename P::targetP>(
                     plainpoly, targetkey);
                 count++;
             }
         }
     }
-    std::cout << "q";
+    std::cout << "q" << std::endl;
 }
 
 template <class P>

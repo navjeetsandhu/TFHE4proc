@@ -8,7 +8,7 @@ namespace TFHEpp {
 template <class P>
 TRLWE<P> trlweSymEncryptZero(const double alpha, const Key<P> &key)
 {
-    std::cout << "g";
+    //std::cout << "g";
     constexpr auto numeric_limit = std::numeric_limits<typename P::T>::max(); // i.e. 0xFFFFFFFF
     constexpr auto dimension = P::n; // i.e. 1024
     constexpr auto k_max = P::k;  // i.e 1
