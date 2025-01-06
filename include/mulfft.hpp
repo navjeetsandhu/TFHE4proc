@@ -29,7 +29,7 @@ inline void TwistIFFTbatch(PolynomialInFDn<P, batch> &res, const Polynomialn<P, 
 template <class P>
 inline void TwistFFT(Polynomial<P> &res, const PolynomialInFD<P> &a)
 {
-    std::cout << "*";
+    //std::cout << "*";
     if constexpr (std::is_same_v<P, lvl1param>)
         TwistFpgaFFT<P::n>(res, a);
     else if constexpr (std::is_same_v<typename P::T, uint64_t>)
