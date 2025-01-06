@@ -54,13 +54,14 @@ void bkfftgen(BootstrappingKeyFFT<P>& bkfft,
              j++) {
             if (j != 0) {
                 plainpoly[0] = domainkey[i] == j;
-                std::cout << "L";
+                std::cout << "p";
                 bkfft[i][count] = trgswfftSymEncrypt<typename P::targetP>(
                     plainpoly, targetkey);
                 count++;
             }
         }
     }
+    std::cout << "q";
 }
 
 template <class P>
