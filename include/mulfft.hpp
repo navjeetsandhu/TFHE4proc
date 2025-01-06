@@ -9,7 +9,7 @@ namespace TFHEpp {
 template <class P, int batch>
 inline void TwistFFTbatch(Polynomialn<P, batch> &res, const PolynomialInFDn<P, batch> &a)
 {
-    std::cout << "b" << batch << " ";
+    //std::cout << "b";
     if constexpr (std::is_same_v<P, lvl1param>)
         TwistFpgaFFTbatch(res[0].data(), a[0].data(), batch);
     else
@@ -19,7 +19,7 @@ inline void TwistFFTbatch(Polynomialn<P, batch> &res, const PolynomialInFDn<P, b
 template <class P, int batch>
 inline void TwistIFFTbatch(PolynomialInFDn<P, batch> &res, const Polynomialn<P, batch> &a)
 {
-    std::cout << "B" << batch << " ";
+    //std::cout << "B";
     if constexpr (std::is_same_v<P, lvl1param>)
         TwistFpgaIFFTbatch(res[0].data(), a[0].data(), batch);
     else
@@ -188,7 +188,7 @@ template <class P>
 inline void PolyMulFFT(Polynomial<P> &res, const Polynomial<P> &a,
                        const Polynomial<P> &b)
 {
-    //std::cout << " PolyMulFFT ";
+    std::cout << "c";
     alignas(64) PolynomialInFD<P> ffta;
     TwistIFFT<P>(ffta, a);
     alignas(64) PolynomialInFD<P> fftb;
@@ -242,6 +242,7 @@ inline void PolyMulRescaleUnsigned(Polynomial<P> &res,
                                    const UnsignedPolynomial<P> &a,
                                    const UnsignedPolynomial<P> &b)
 {
+    std::cout << "d";
     PolynomialInFD<P> ffta, fftb;
     TwistIFFT<P>(ffta, a);
     TwistIFFT<P>(fftb, b);

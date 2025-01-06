@@ -251,7 +251,7 @@ void subprivkskgen(SubsetPrivateKeySwitchingKey<P>& privksk,
 template <class P>
 relinKeyFFT<P> relinKeyFFTgen(const Key<P>& key)
 {
-    std::cout << " relinKeyFFTgen ";
+    std::cout << "f";
     relinKey<P> relinkey = relinKeygen<P>(key);
     relinKeyFFT<P> relinkeyfft;
     for (int i = 0; i < P::l; i++)

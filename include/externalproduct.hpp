@@ -14,7 +14,7 @@ template <class P>
 void trgswfftExternalProduct(TRLWE<P> &res, const TRLWE<P> &trlwe,
                              const TRGSWFFT<P> &trgswfft)
 {
-    //std::cout << "trgswfftExternalProduct";
+    std::cout << "e";
     alignas(64) DecomposedPolynomial<P> decpoly;
     Decomposition<P>(decpoly, trlwe[0]);
     alignas(64) PolynomialInFD<P> decpolyfft;

@@ -12,7 +12,7 @@ namespace TFHEpp {
 template <class P>
 TRGSWFFT<P> ApplyFFT2trgsw(const TRGSW<P> &trgsw)
 {
-    //std::cout << " ApplyFFT2trgsw ";
+    std::cout << "a";
     alignas(64) TRGSWFFT<P> trgswfft;
     for (int i = 0; i < (P::k + 1) * P::l; i++)
         for (int j = 0; j < (P::k + 1); j++)
