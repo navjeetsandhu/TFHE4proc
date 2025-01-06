@@ -6,11 +6,6 @@ TFHEfft is full Scracthed pure C++ Ver. of TFHE.
 ### build using FPGA 
 ./fftBuild.sh
 
-### build using FFTW3
-./fftBuild.sh 1
-
-### build using SPQLIOS
-./fftBuild.sh 2
 
 # Supported Compiler
 GCC9.1 later are primarily supported compilers.
@@ -31,12 +26,9 @@ $ sudo apt-get install libfftw3-dev
 To check where the install put stuff (not the install would have installed additional packages in addition to just the base libfftw3 package.
 $ dpkg -L libfftw3-dev
 
-TFHEfft can use fftw3 with following script
-./fftBuild.sh 1
 
 ### SPQLIOS
 SPQLIOS is the FFT library using AVX2 that is dedicated to the ring R\[X\]/(X^N+1) for N a power of 2.
-./fftBuild.sh 2
 
 ### FPGA
 TFHEfft uses FPGA by default
