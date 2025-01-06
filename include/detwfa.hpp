@@ -18,7 +18,7 @@ void CMUXFFT(TRLWE<P> &res, const TRGSWFFT<P> &cs, const TRLWE<P> &c1,
 template <class P>
 TRGSWFFT<P> TRGSWFFTOneGen()
 {
-    //std::cout << " TRGSWFFTOneGen ";
+    std::cout << "h";
     constexpr std::array<typename P::T, P::l> h = hgen<P>();
     TRGSW<P> trgsw = {};
     for (int i = 0; i < P::l; i++) {
