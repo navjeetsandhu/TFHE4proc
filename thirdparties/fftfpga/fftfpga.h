@@ -96,16 +96,6 @@ extern fpga_t fftfpga_c2c_1d(const unsigned N, const double2 *inp, double2 *out,
  */
 extern fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned iter);
 
-/**
- * @brief  compute an out-of-place single precision complex 1D-FFT on the FPGA
- * @param  N    : integer pointer to size of FFT3d  
- * @param  inp  : float2 pointer to input data of size N
- * @param  out  : float2 pointer to output data of size N
- * @param  inv  : int toggle to activate backward FFT
- * @param  iter : number of iterations of the N point FFT
- * @return fpga_t : time taken in milliseconds for data transfers and execution
- */
-extern fpga_t fftfpgaf_c2c_1d_svm(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned batch);
 
 #ifdef __cplusplus
 }
