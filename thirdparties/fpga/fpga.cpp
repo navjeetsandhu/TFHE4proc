@@ -54,6 +54,10 @@ void fpga_close() {
     fpga_final();
 }
 
+bool isEven(int num) {
+    return num % 2 == 0;
+}
+
 
 /**
  * @brief  compute an out-of-place single precision complex 1D-FFT on the FPGA
@@ -68,8 +72,12 @@ fpga_t fpga_fft(const unsigned num, const float2 *inp, float2 *out, const bool i
     fpga_t runtime ={0, 0, 0, 0,0, false};
 
     try {
-        runtime = fftfpgaf_c2c_1d(num, inp, out, inv, batch);
-        correct_data_order(out, num, batch);
+        if(isEven(batch)) {
+            runtime = fftfpgaf_c2c_1d(num, inp, out, inv, batch);
+            correct_data_order(out, num, batch);
+        } else {
+            cerr << batch << " batch has to be even" << endl;
+        }
     }
     catch(const char* msg){
         cerr << msg << endl;
