@@ -42,14 +42,14 @@ int main()
 
     elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 
-    cout << endl << elapsed / batch << "ms for emplacebkfft" << endl;
+    cout << elapsed / batch << "ms for emplacebkfft" << endl;
 
     start = chrono::system_clock::now();
     ek.emplaceiksk<TFHEpp::lvl10param>(*sk);
     end = chrono::system_clock::now();
 
     elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-    cout << endl << elapsed / batch << "ms for emplaceiksk" << endl;
+    cout << elapsed / batch << "ms for emplaceiksk" << endl;
 
     for (j = 0; j < batch; j++) pa[j] = binary(engine) > 0;
     for (j = 0; j < batch; j++) pb[j] = binary(engine) > 0;
@@ -86,8 +86,8 @@ int main()
         else
             failCount++;
     }
-   cout << endl << endl << "Pass count: " << passCount << "Fail count: " << failCount << endl;
+   cout << endl << endl << "Pass count: " << passCount << "  Fail count: " << failCount << endl;
    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-    //cout << elapsed << "ms is total elapsed" << endl;
-    cout << elapsed / batch << "ms" << endl;
+   cout << elapsed << "ms is total elapsed" << endl;
+   cout << elapsed / batch << "ms" << endl;
 }
