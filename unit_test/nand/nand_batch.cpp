@@ -88,6 +88,6 @@ int main()
     }
    cout << endl << endl << "Pass count: " << passCount << "  Fail count: " << failCount << endl;
    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-   cout << elapsed << "ms is total elapsed" << endl;
-   cout << elapsed / batch << "ms" << endl;
+   cout <<"total time for batch: "<< elapsed << "ms " << endl;
+   cout << "single gate time: " << elapsed / batch << "ms" << endl;
 }
