@@ -72,7 +72,7 @@ fpga_t fpga_fft(const unsigned num, const float2 *inp, float2 *out, const bool i
     fpga_t runtime ={0, 0, 0, 0,0, false};
 
     try {
-        if(isEven(batch)) {
+        if(isEven(batch) || batch == 1) {
             runtime = fftfpgaf_c2c_1d(num, inp, out, inv, batch);
             correct_data_order(out, num, batch);
         } else {
