@@ -54,7 +54,7 @@ void fpga_close() {
     fpga_final();
 }
 
-bool isEven(int num) {
+inline bool isEven(int num) {
     return num % 2 == 0;
 }
 
