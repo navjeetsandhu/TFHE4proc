@@ -46,7 +46,7 @@ void bkfftgen(BootstrappingKeyFFT<P>& bkfft,
               const Key<typename P::domainP>& domainkey,
               const Key<typename P::targetP>& targetkey)
 {
-    std::cout << std::endl << "l";
+    //std::cout << std::endl << "l";
     Polynomial<typename P::targetP> plainpoly = {};
     for (int i = 0; i < P::domainP::k * P::domainP::n; i++) {
         int count = 0;
@@ -61,7 +61,7 @@ void bkfftgen(BootstrappingKeyFFT<P>& bkfft,
             }
         }
     }
-    std::cout << "q" << std::endl;
+    //std::cout << "q" << std::endl;
 }
 
 template <class P>
@@ -147,7 +147,7 @@ void privkskgen(PrivateKeySwitchingKey<P>& privksk,
                 const Key<typename P::domainP>& domainkey,
                 const Key<typename P::targetP>& targetkey)
 {
-    std::cout << "i";
+    //std::cout << "i";
     std::array<typename P::domainP::T, P::domainP::k * P::domainP::n + 1> key;
     for (int i = 0; i < P::domainP::k * P::domainP::n; i++)
         key[i] = domainkey[i];
@@ -255,7 +255,7 @@ void subprivkskgen(SubsetPrivateKeySwitchingKey<P>& privksk,
 template <class P>
 relinKeyFFT<P> relinKeyFFTgen(const Key<P>& key)
 {
-    std::cout << "f";
+    //std::cout << "f";
     relinKey<P> relinkey = relinKeygen<P>(key);
     relinKeyFFT<P> relinkeyfft;
     for (int i = 0; i < P::l; i++)
@@ -348,7 +348,7 @@ struct EvalKey {
     template <class P>
     void emplacebkfft(const SecretKey& sk)
     {
-        std::cout << "m";
+        //std::cout << "m";
         if constexpr (std::is_same_v<P, lvl01param>) {
             bkfftlvl01 = std::unique_ptr<BootstrappingKeyFFT<lvl01param>>(
                 new (std::align_val_t(64)) BootstrappingKeyFFT<lvl01param>());
@@ -376,7 +376,7 @@ struct EvalKey {
     template <class P>
     void emplacebk2bkfft()
     {
-        std::cout << " emplacebk2bkfft ";
+        //std::cout << " emplacebk2bkfft ";
         if constexpr (std::is_same_v<P, lvl01param>) {
             bkfftlvl01 = std::make_unique<
                 BootstrappingKeyFFT<lvl01param>>();

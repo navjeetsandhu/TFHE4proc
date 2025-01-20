@@ -1,6 +1,6 @@
 
 [solana@localhost nand]$ pwd
-/home/solana/code/TFHEexp1/build/unit_test/nand
+/home/solana/code/TFHEexp2core/build/unit_test/nand
 [solana@localhost nand]$ ./nand_batch
 
 batch: 50

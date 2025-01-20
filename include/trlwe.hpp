@@ -60,7 +60,7 @@ TRLWEn<P, batch> trlweSymEncryptZerobatch(const double alpha, const Key<P> &key)
 template <class P>
 TRLWE<P> trlweSymEncryptZero(const uint eta, const Key<P> &key)
 {
-    std::cout << "G";
+    //std::cout << "G";
     constexpr auto numeric_limit = std::numeric_limits<typename P::T>::max(); // i.e. 0xFFFFFFFF
     constexpr auto dimension = P::n; // i.e. 1024
     constexpr auto k_max = P::k; // i.e 1
@@ -135,7 +135,7 @@ template <class P>
 TRLWE<P> trlweSymEncrypt(const std::array<typename P::T, P::n> &p,
                          const double alpha, const Key<P> &key)
 {
-    std::cout << "k";
+    //std::cout << "k";
     TRLWE<P> c = trlweSymEncryptZero<P>(alpha, key);
     for (int i = 0; i < P::n; i++) c[P::k][i] += p[i];
     return c;
@@ -156,7 +156,7 @@ template <class P>
 TRLWE<P> trlweSymEncrypt(const std::array<typename P::T, P::n> &p, const uint eta,
                          const Key<P> &key)
 {
-    std::cout << "K";
+    //std::cout << "K";
     TRLWE<P> c = trlweSymEncryptZero<P>(eta, key);
     for (int i = 0; i < P::n; i++) c[P::k][i] += p[i];
     return c;
