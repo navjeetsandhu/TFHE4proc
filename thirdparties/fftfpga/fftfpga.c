@@ -160,9 +160,9 @@ void queue_setup(){
   queue6 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   checkError(status, "Failed to create command queue6");
   queue7 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue6");
+  checkError(status, "Failed to create command queue7");
   queue8 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue6");
+  checkError(status, "Failed to create command queue8");
 }
 
 /**
