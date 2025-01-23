@@ -24,14 +24,19 @@
  * \param  batch : number of batched executions of 1D FFT
  * \return fpga_t : time taken in milliseconds for data transfers and execution
  */
-fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned batch2){
+fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned batch4){
 
     fpga_t fft_time = {0.0, 0.0, 0.0, 0};
     cl_kernel kernel1 = NULL, kernel2 = NULL, kernel3 = NULL, kernel4 = NULL;
+    cl_kernel kernel5 = NULL, kernel6 = NULL, kernel7 = NULL, kernel8 = NULL;
     cl_int status = 0;
-    const unsigned batch = batch2/2;
+    const unsigned batch = batch4/4;
     const float2 *inp_2 =  inp + (N*batch);
+    const float2 *inp_3 =  inp + (N*batch*2);
+    const float2 *inp_4 =  inp + (N*batch*3);
     float2 *out_2 =  out + (N*batch);
+    float2 *out_3 =  out + (N*batch*2);
+    float2 *out_4 =  out + (N*batch*3);
 
     // if N is not a power of 2
     if(inp == NULL || out == NULL || ( (N & (N-1)) !=0)){
@@ -43,6 +48,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
     queue_setup();
 
     cl_mem d_inData, d_outData, d_inData_2, d_outData_2;
+    cl_mem d_inData_3, d_outData_3, d_inData_4, d_outData_4;
     //printf("Launching%s FFT transform for %d batch \n", inv ? " inverse":"", batch);
 
     // Create device buffers - assign the buffers in different banks for more efficient memory access

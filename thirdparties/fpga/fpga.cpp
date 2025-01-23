@@ -54,8 +54,8 @@ void fpga_close() {
     fpga_final();
 }
 
-inline bool isEven(int num) {
-    return num % 2 == 0;
+inline bool is4Div(int num) {
+    return num % 4 == 0;
 }
 
 
@@ -76,11 +76,11 @@ fpga_t fpga_fft(const unsigned num, const float2 *inp, float2 *out, const bool i
             runtime = fftfpgaf_c2c_1d_(num, inp, out, inv);
             correct_data_order(out, num, batch);
         }
-        else if(isEven(batch)) {
+        else if(is4Div(batch)) {
             runtime = fftfpgaf_c2c_1d(num, inp, out, inv, batch);
             correct_data_order(out, num, batch);
         } else {
-            cerr << batch << " batch has to be even" << endl;
+            cerr << batch << " batch has to be divisible by 4" << endl;
         }
     }
     catch(const char* msg){

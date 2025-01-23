@@ -8,7 +8,7 @@
 
 
 #define CAST_DOUBLE_TO_UINT32(d) ((uint32_t)((int64_t)(d)))
-#define max_batch 200
+#define max_batch 800
 
 
 FFT_Processor_FPGA::FFT_Processor_FPGA(const int32_t N)
