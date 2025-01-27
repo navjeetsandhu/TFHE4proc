@@ -144,45 +144,70 @@ void fpga_final(){
 /**
  * \brief Create a command queue for each kernel
  */
-void queue_setup(){
+void queue_setup_1(){
   cl_int status = 0;
   // Create one command queue for each kernel.
   queue1 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   checkError(status, "Failed to create command queue1");
   queue2 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
   checkError(status, "Failed to create command queue2");
-  queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue3");
-  queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue4");
-  queue5 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue5");
-  queue6 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue6");
-  queue7 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue7");
-  queue8 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
-  checkError(status, "Failed to create command queue8");
 }
+
+void queue_setup_2(){
+    cl_int status = 0;
+    queue3 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+    checkError(status, "Failed to create command queue3");
+    queue4 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+    checkError(status, "Failed to create command queue4");
+}
+
+void queue_setup_3(){
+    cl_int status = 0;
+    // Create one command queue for each kernel.
+    queue5 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+    checkError(status, "Failed to create command queue5");
+    queue6 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+    checkError(status, "Failed to create command queue6");
+}
+
+void queue_setup_4(){
+    cl_int status = 0;
+    // Create one command queue for each kernel.
+    queue7 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+    checkError(status, "Failed to create command queue7");
+    queue8 = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &status);
+    checkError(status, "Failed to create command queue8");
+}
+
+
 
 /**
  * \brief Release all command queues
  */
-void queue_cleanup() {
+void queue_cleanup_1() {
   if(queue1) 
     clReleaseCommandQueue(queue1);
   if(queue2) 
     clReleaseCommandQueue(queue2);
-  if(queue3) 
-    clReleaseCommandQueue(queue3);
-  if(queue4) 
-    clReleaseCommandQueue(queue4);
-  if(queue5) 
-    clReleaseCommandQueue(queue5);
-  if(queue6) 
-    clReleaseCommandQueue(queue6);
-  if(queue7) 
-    clReleaseCommandQueue(queue7);
-  if(queue8) 
-    clReleaseCommandQueue(queue8);
+}
+
+void queue_cleanup_2() {
+    if(queue3)
+        clReleaseCommandQueue(queue3);
+    if(queue4)
+        clReleaseCommandQueue(queue4);
+}
+
+void queue_cleanup_3() {
+    if(queue5)
+        clReleaseCommandQueue(queue5);
+    if(queue6)
+        clReleaseCommandQueue(queue6);
+}
+
+void queue_cleanup_4() {
+    if(queue7)
+        clReleaseCommandQueue(queue7);
+    if(queue8)
+        clReleaseCommandQueue(queue8);
 }

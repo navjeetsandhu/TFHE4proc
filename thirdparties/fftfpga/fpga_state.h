@@ -16,7 +16,16 @@ extern cl_command_queue queue7, queue8;
 
 extern bool svm_enabled;
 
-extern void queue_setup();
-extern void queue_cleanup();
+extern void queue_setup_1();
+extern void queue_cleanup_1();
+
+extern void queue_setup_2();
+extern void queue_cleanup_2();
+
+extern void queue_setup_3();
+extern void queue_cleanup_3();
+
+extern void queue_setup_4();
+extern void queue_cleanup_4();
 
 #endif
