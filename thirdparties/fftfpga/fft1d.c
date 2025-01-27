@@ -17,11 +17,11 @@
 #include "misc.h"
 
 typedef struct thread_data {
-    unsigned N;
-    float2 *inp;
+    const unsigned N;
+    const float2 *inp;
     float2 *out;
     int inverse_int;
-    unsigned batch;
+    const unsigned batch;
 } thread_data;
 
 
