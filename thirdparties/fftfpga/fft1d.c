@@ -458,7 +458,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
         return fft_time;
     }
 
-    rc = pthread_create(&thread_3, NULL, ftfpgaf_c2c_1d_proc_3, (void *)&data);
+    rc = pthread_create(&thread_3, NULL, fftfpgaf_c2c_1d_proc_3, (void *)&data);
     if (rc) {
         printf("ERROR; return code from pthread_create() is %d\n", rc);
         return fft_time;
