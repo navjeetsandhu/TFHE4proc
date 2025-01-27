@@ -52,7 +52,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
     //printf("Launching%s FFT transform for %d batch \n", inv ? " inverse":"", batch);
 
     // Create device buffers - assign the buffers in different banks for more efficient memory access
-    d_inData = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float2) * N * batch, NULL, &status);
+    d_inData = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_CHANNEL_1_INTELFPGA, sizeof(float2) * N * batch, NULL, &status);
     checkError(status, "Failed to allocate input device buffer\n");
 
     d_inData_2 = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_CHANNEL_2_INTELFPGA, sizeof(float2) * N * batch, NULL, &status);
@@ -64,7 +64,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
     d_inData_4 = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_CHANNEL_4_INTELFPGA, sizeof(float2) * N * batch, NULL, &status);
     checkError(status, "Failed to allocate input d_inData_4 buffer\n");
 
-    d_outData = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(float2) * N * batch, NULL, &status);
+    d_outData = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_CHANNEL_1_INTELFPGA, sizeof(float2) * N * batch, NULL, &status);
     checkError(status, "Failed to allocate output device buffer\n");
 
     d_outData_2 = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_CHANNEL_2_INTELFPGA, sizeof(float2) * N * batch, NULL, &status);
