@@ -433,7 +433,10 @@ void _checkError(const char *file, int line, const char *func, cl_int err, const
     printf("\n");
     va_end(vl);
 
-    queue_cleanup();
+    queue_cleanup_1();
+    queue_cleanup_2();
+    queue_cleanup_3();
+    queue_cleanup_4();
     fpga_final();
     exit(err);
   }

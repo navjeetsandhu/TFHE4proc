@@ -3,7 +3,10 @@
 #ifndef OPENCL_UTILS_H
 #define OPENCL_UTILS_H
 
-extern void queue_cleanup();
+extern void queue_cleanup_1();
+extern void queue_cleanup_2();
+extern void queue_cleanup_3();
+extern void queue_cleanup_4();
 extern void fpga_final();
 
 // Search for a platform that contains the search string
