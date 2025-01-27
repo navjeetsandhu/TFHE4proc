@@ -5,15 +5,25 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <pthread.h>
 #define CL_VERSION_2_0
 #include <CL/cl_ext_intelfpga.h> // to disable interleaving & transfer data to specific banks - CL_CHANNEL_1_INTELFPGA
 #include "CL/opencl.h"
-#include <thread>
+
 #include "fpga_state.h"
 #include "fftfpga.h"
 #include "svm.h"
 #include "opencl_utils.h"
 #include "misc.h"
+
+typedef struct thread_data {
+    unsigned N;
+    float2 *inp;
+    float2 *out;
+    int inverse_int;
+    unsigned batch;
+} thread_data;
+
 
 /**
  * \brief  compute an out-of-place single precision complex 1D-FFT on the FPGA
@@ -124,7 +134,13 @@ fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, 
     return fft_time;
 }
 
-void fftfpgaf_c2c_1d_proc_2(const unsigned N, const float2 *inp, float2 *out, int inverse_int, const unsigned batch){
+void *fftfpgaf_c2c_1d_proc_2(void *arg) {
+    thread_data *data = (thread_data *)arg;
+    const unsigned N = data->N;
+    const float2 *inp = data->inp;
+    float2 *out = data->out;
+    int inverse_int = data->inverse_int;
+    const unsigned batch = data->batch;
 
     cl_kernel kernel3 = NULL, kernel4 = NULL;
     cl_int status = 0;
@@ -213,11 +229,17 @@ void fftfpgaf_c2c_1d_proc_2(const unsigned N, const float2 *inp, float2 *out, in
         clReleaseKernel(kernel4);
 
     queue_cleanup_2();
-
+    pthread_exit(NULL);
 
 }
 
-void fftfpgaf_c2c_1d_proc_3(const unsigned N, const float2 *inp, float2 *out, int inverse_int, const unsigned batch){
+void *fftfpgaf_c2c_1d_proc_3(void *arg) {
+    thread_data *data = (thread_data *)arg;
+    const unsigned N = data->N;
+    const float2 *inp = data->inp;
+    float2 *out = data->out;
+    int inverse_int = data->inverse_int;
+    const unsigned batch = data->batch;
     cl_kernel kernel5 = NULL, kernel6 = NULL;
     cl_int status = 0;
 
@@ -306,10 +328,16 @@ void fftfpgaf_c2c_1d_proc_3(const unsigned N, const float2 *inp, float2 *out, in
         clReleaseKernel(kernel6);
 
     queue_cleanup_3();
-
+    pthread_exit(NULL);
 }
 
-void fftfpgaf_c2c_1d_proc_4(const unsigned N, const float2 *inp, float2 *out, int inverse_int, const unsigned batch){
+void *fftfpgaf_c2c_1d_proc_4(void *arg) {
+    thread_data *data = (thread_data *)arg;
+    const unsigned N = data->N;
+    const float2 *inp = data->inp;
+    float2 *out = data->out;
+    int inverse_int = data->inverse_int;
+    const unsigned batch = data->batch;
 
     cl_kernel  kernel7 = NULL, kernel8 = NULL;
     cl_int status = 0;
@@ -396,9 +424,14 @@ void fftfpgaf_c2c_1d_proc_4(const unsigned N, const float2 *inp, float2 *out, in
     if(kernel8)
         clReleaseKernel(kernel8);
     queue_cleanup_4();
+    pthread_exit(NULL);
 }
 
 fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned batch4){
+    pthread_t thread_2, thread_3, thread_4;
+    thread_data data;
+
+
     fpga_t fft_time = {0.0, 0.0, 0.0, 0};
     const unsigned batch = batch4/4;
 
@@ -407,16 +440,39 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
         return fft_time;
     }
 
+
     // Can't pass bool to device, so convert it to int
     int inverse_int = (int)inv;
-    std::thread t_2(fftfpgaf_c2c_1d_proc_2, N, inp, out, inverse_int, batch);
-    std::thread t_3(fftfpgaf_c2c_1d_proc_3, N, inp, out, inverse_int, batch);
-    std::thread t_4(fftfpgaf_c2c_1d_proc_4, N, inp, out, inverse_int, batch);
-    fft_time = fftfpgaf_c2c_1d_proc_1(N, inp, out, inverse_int, batch);
 
-    t_2.join();
-    t_3.join();
-    t_4.join();
+
+    data.N = N;
+    data.inp = inp;
+    data.out = out;
+    data.inverse_int = inverse_int;
+    data.batch = batch;
+
+
+    int rc = pthread_create(&thread_2, NULL, fftfpgaf_c2c_1d_proc_2, (void *)&data);
+    if (rc) {
+        printf("ERROR; return code from pthread_create() is %d\n", rc);
+        return fft_time;
+    }
+
+    rc = pthread_create(&thread_3, NULL, ftfpgaf_c2c_1d_proc_3, (void *)&data);
+    if (rc) {
+        printf("ERROR; return code from pthread_create() is %d\n", rc);
+        return fft_time;
+    }
+
+    rc = pthread_create(&thread_4, NULL, fftfpgaf_c2c_1d_proc_4, (void *)&data);
+    if (rc) {
+        printf("ERROR; return code from pthread_create() is %d\n", rc);
+        return fft_time;
+    }
+
+    pthread_join(thread_2, NULL);
+    pthread_join(thread_3, NULL);
+    pthread_join(thread_4, NULL);
 
     return fft_time;
 }
