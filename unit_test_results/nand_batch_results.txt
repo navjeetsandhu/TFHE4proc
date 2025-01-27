@@ -7,7 +7,7 @@ batch: 800
 55 ms
 
 batch: 600
-55 ms
+54 ms
 
 batch: 400
 58
