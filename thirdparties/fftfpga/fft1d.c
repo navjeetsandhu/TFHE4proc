@@ -74,8 +74,8 @@ fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, 
     size_t gs = batch * ls;
 
     //printf("-- Executing kernels\n");
-    cl_event startExec_event, endExec_event, startExec_event_2, endExec_event_2;
-    cl_event startExec_event_3, endExec_event_3, startExec_event_4, endExec_event_4;
+    cl_event startExec_event, endExec_event;
+
     // Measure execution time
     // Launch the kernel - we launch a single work item hence enqueue a task
     // FFT1d kernel is the SWI kernel
