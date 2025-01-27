@@ -430,7 +430,7 @@ fpga_t fftfpgaf_c2c_1d_(const unsigned N, const float2 *inp, float2 *out, const 
 
     //printf("-- Launching%s 1D FFT of %d batches \n", inv ? " inverse":"", batch);
 
-    queue_setup();
+    queue_setup_1();
 
     cl_mem d_inData, d_outData;
     //printf("Launching%s FFT transform for %d batch \n", inv ? " inverse":"", batch);
@@ -512,7 +512,7 @@ fpga_t fftfpgaf_c2c_1d_(const unsigned N, const float2 *inp, float2 *out, const 
         clReleaseKernel(kernel1);
     if(kernel2)
         clReleaseKernel(kernel2);
-    queue_cleanup();
+    queue_cleanup_1();
 
     fft_time.valid = 1;
     return fft_time;
