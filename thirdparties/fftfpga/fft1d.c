@@ -8,7 +8,7 @@
 #define CL_VERSION_2_0
 #include <CL/cl_ext_intelfpga.h> // to disable interleaving & transfer data to specific banks - CL_CHANNEL_1_INTELFPGA
 #include "CL/opencl.h"
-
+#include <thread>
 #include "fpga_state.h"
 #include "fftfpga.h"
 #include "svm.h"
@@ -409,10 +409,16 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
 
     // Can't pass bool to device, so convert it to int
     int inverse_int = (int)inv;
-    fftfpgaf_c2c_1d_proc_2(N, inp, out, inverse_int, batch);
-    fftfpgaf_c2c_1d_proc_3(N, inp, out, inverse_int, batch);
-    fftfpgaf_c2c_1d_proc_4(N, inp, out, inverse_int, batch);
-    return fftfpgaf_c2c_1d_proc_1(N, inp, out, inverse_int, batch);
+    std::thread t_2(fftfpgaf_c2c_1d_proc_2, N, inp, out, inverse_int, batch);
+    std::thread t_3(fftfpgaf_c2c_1d_proc_3, N, inp, out, inverse_int, batch);
+    std::thread t_4(fftfpgaf_c2c_1d_proc_4, N, inp, out, inverse_int, batch);
+    fft_time = fftfpgaf_c2c_1d_proc_1(N, inp, out, inverse_int, batch);
+
+    t_2.join();
+    t_3.join();
+    t_4.join();
+
+    return fft_time;
 }
 
 
