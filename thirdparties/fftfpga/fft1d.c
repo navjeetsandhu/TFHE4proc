@@ -305,7 +305,7 @@ void fftfpgaf_c2c_1d_proc_3(const unsigned N, const float2 *inp, float2 *out, in
     if(kernel6)
         clReleaseKernel(kernel6);
 
-    queue_cleanu_3();
+    queue_cleanup_3();
 
 }
 
