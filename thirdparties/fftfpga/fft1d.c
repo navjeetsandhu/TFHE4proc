@@ -399,7 +399,7 @@ void fftfpgaf_c2c_1d_proc_4(const unsigned N, const float2 *inp, float2 *out, in
 }
 
 fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned batch4){
-
+    fpga_t fft_time = {0.0, 0.0, 0.0, 0};
     const unsigned batch = batch4/4;
 
     // if N is not a power of 2
