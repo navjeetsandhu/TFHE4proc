@@ -395,7 +395,7 @@ void fftfpgaf_c2c_1d_proc_4(const unsigned N, const float2 *inp, float2 *out, in
         clReleaseKernel(kernel7);
     if(kernel8)
         clReleaseKernel(kernel8);
-    queue_cleanup_4);
+    queue_cleanup_4();
 }
 
 fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const bool inv, const unsigned batch4){
