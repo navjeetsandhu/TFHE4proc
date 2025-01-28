@@ -36,13 +36,14 @@ typedef struct thread_data {
 
 
 fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, int inverse_int, const unsigned batch){
+/*
     cpu_set_t cpuset;
     pthread_t thread;
     thread = pthread_self();
     CPU_ZERO(&cpuset);
     CPU_SET(2, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
-
+*/
     //int cpu = sched_getcpu();
     //printf(" a: %d\n ", cpu);
 
@@ -143,13 +144,14 @@ fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, 
 }
 
 void *fftfpgaf_c2c_1d_proc_2(void *arg) {
+    /*
     cpu_set_t cpuset;
     pthread_t thread;
     thread = pthread_self();
     CPU_ZERO(&cpuset);
     CPU_SET(3, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
-
+*/
     //int cpu = sched_getcpu();
     //printf(" b: %d\n ", cpu);
 
@@ -252,13 +254,14 @@ void *fftfpgaf_c2c_1d_proc_2(void *arg) {
 }
 
 void *fftfpgaf_c2c_1d_proc_3(void *arg) {
+    /*
     cpu_set_t cpuset;
     pthread_t thread;
     thread = pthread_self();
     CPU_ZERO(&cpuset);
     CPU_SET(4, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
-
+*/
     //int cpu = sched_getcpu();
     //printf(" c: %d\n ", cpu);
 
@@ -360,13 +363,14 @@ void *fftfpgaf_c2c_1d_proc_3(void *arg) {
 }
 
 void *fftfpgaf_c2c_1d_proc_4(void *arg) {
+/*
     cpu_set_t cpuset;
     pthread_t thread;
     thread = pthread_self();
     CPU_ZERO(&cpuset);
     CPU_SET(5, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
-
+*/
     //int cpu = sched_getcpu();
     //printf(" d: %d\n ", cpu);
 
