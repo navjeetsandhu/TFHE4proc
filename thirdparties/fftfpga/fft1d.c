@@ -43,8 +43,8 @@ fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, 
     CPU_SET(2, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
 
-    int cpu = sched_getcpu();
-    printf(" a: %d\n ", cpu);
+    //int cpu = sched_getcpu();
+    //printf(" a: %d\n ", cpu);
 
     fpga_t fft_time = {0.0, 0.0, 0.0, 0};
     cl_kernel kernel1 = NULL, kernel2 = NULL;
@@ -150,8 +150,8 @@ void *fftfpgaf_c2c_1d_proc_2(void *arg) {
     CPU_SET(3, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
 
-    int cpu = sched_getcpu();
-    printf(" b: %d\n ", cpu);
+    //int cpu = sched_getcpu();
+    //printf(" b: %d\n ", cpu);
 
     thread_data *data = (thread_data *)arg;
     const unsigned N = data->N;
@@ -259,8 +259,8 @@ void *fftfpgaf_c2c_1d_proc_3(void *arg) {
     CPU_SET(4, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
 
-    int cpu = sched_getcpu();
-    printf(" c: %d\n ", cpu);
+    //int cpu = sched_getcpu();
+    //printf(" c: %d\n ", cpu);
 
     thread_data *data = (thread_data *)arg;
     const unsigned N = data->N;
@@ -367,8 +367,8 @@ void *fftfpgaf_c2c_1d_proc_4(void *arg) {
     CPU_SET(5, &cpuset); //setting thread affinity to CPU 3
     pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
 
-    int cpu = sched_getcpu();
-    printf(" d: %d\n ", cpu);
+    //int cpu = sched_getcpu();
+    //printf(" d: %d\n ", cpu);
 
     thread_data *data = (thread_data *)arg;
     const unsigned N = data->N;
