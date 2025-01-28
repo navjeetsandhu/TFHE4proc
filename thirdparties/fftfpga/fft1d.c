@@ -1,5 +1,3 @@
-// Author: Arjun Ramaswami
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +7,7 @@
 #define CL_VERSION_2_0
 #include <CL/cl_ext_intelfpga.h> // to disable interleaving & transfer data to specific banks - CL_CHANNEL_1_INTELFPGA
 #include "CL/opencl.h"
-
+#include <sched.h>
 #include "fpga_state.h"
 #include "fftfpga.h"
 #include "svm.h"
@@ -37,6 +35,9 @@ typedef struct thread_data {
 
 
 fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, int inverse_int, const unsigned batch){
+
+    int cpu = sched_getcpu();
+    printf("1: Running on CPU: %d\n", cpu);
 
     fpga_t fft_time = {0.0, 0.0, 0.0, 0};
     cl_kernel kernel1 = NULL, kernel2 = NULL;
