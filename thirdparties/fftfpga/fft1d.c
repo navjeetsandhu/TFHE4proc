@@ -36,9 +36,8 @@ typedef struct thread_data {
 
 
 fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, int inverse_int, const unsigned batch){
-
     int cpu = sched_getcpu();
-    printf("1: Running on CPU: %d\n", cpu);
+    printf(" a: %d\n ", cpu);
 
     fpga_t fft_time = {0.0, 0.0, 0.0, 0};
     cl_kernel kernel1 = NULL, kernel2 = NULL;
@@ -137,6 +136,9 @@ fpga_t fftfpgaf_c2c_1d_proc_1(const unsigned N, const float2 *inp, float2 *out, 
 }
 
 void *fftfpgaf_c2c_1d_proc_2(void *arg) {
+    int cpu = sched_getcpu();
+    printf(" b: %d\n ", cpu);
+
     thread_data *data = (thread_data *)arg;
     const unsigned N = data->N;
     const float2 *inp = data->inp;
@@ -236,6 +238,10 @@ void *fftfpgaf_c2c_1d_proc_2(void *arg) {
 }
 
 void *fftfpgaf_c2c_1d_proc_3(void *arg) {
+
+    int cpu = sched_getcpu();
+    printf(" c: %d\n ", cpu);
+
     thread_data *data = (thread_data *)arg;
     const unsigned N = data->N;
     const float2 *inp = data->inp;
@@ -334,6 +340,9 @@ void *fftfpgaf_c2c_1d_proc_3(void *arg) {
 }
 
 void *fftfpgaf_c2c_1d_proc_4(void *arg) {
+    int cpu = sched_getcpu();
+    printf(" d: %d\n ", cpu);
+
     thread_data *data = (thread_data *)arg;
     const unsigned N = data->N;
     const float2 *inp = data->inp;
@@ -471,6 +480,9 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
         printf("ERROR; return code from pthread_create() is %d\n", rc);
         return fft_time;
     }
+
+    fft_time = fftfpgaf_c2c_1d_proc_1(N, inp, out, inverse_int, batch);
+
 
     pthread_join(thread_2, NULL);
     pthread_join(thread_3, NULL);
