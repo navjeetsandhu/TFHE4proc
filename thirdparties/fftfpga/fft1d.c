@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +8,6 @@
 #define CL_VERSION_2_0
 #include <CL/cl_ext_intelfpga.h> // to disable interleaving & transfer data to specific banks - CL_CHANNEL_1_INTELFPGA
 #include "CL/opencl.h"
-#define _GNU_SOURCE
 #include <sched.h>
 #include "fpga_state.h"
 #include "fftfpga.h"
